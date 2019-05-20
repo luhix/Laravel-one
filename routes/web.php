@@ -12,5 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return '主页';
+});
+Route::get('/help', function () {
+    return '帮助';
+});
+Route::get('/about', function () {
+    return '关于';
 });
