@@ -65,10 +65,29 @@ class User extends Authenticatable
     {
         return $this->hasMany(Status::class);
     }
-    
+
+    /**
+     *
+     * @DESC: 微博消息动态流
+     *
+     * @author: HX
+     * @Time: 2019/5/22   15:40
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function feed()
     {
-        return $this->statuses()
+        //自己的动态
+        /*return $this->statuses()
+            ->orderBy('created_at', 'desc');*/
+
+        /*
+         * 所有关注用户的动态和自己的动态
+         */
+        $user_ids = $this->followings->pluck('id')->toArray();
+        array_push($user_ids, $this->id);
+        return Status::whereIn('user_id', $user_ids)
+            ->with('user')
             ->orderBy('created_at', 'desc');
     }
 
