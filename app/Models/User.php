@@ -117,9 +117,19 @@ class User extends Authenticatable
         
         $this->followings()->detach($user_ids);
     }
-    
+
+    /**
+     *
+     * @DESC: 判断是否被关注
+     *
+     * @author: HX
+     * @Time: 2019/5/22   15:38
+     *
+     * @param $user_id
+     * @return mixed
+     */
     public function isFollowing($user_id)
     {
-        return $this->followings()->contains($user_id);
+        return $this->followings->contains($user_id);
     }
 }
