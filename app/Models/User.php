@@ -51,4 +51,18 @@ class User extends Authenticatable
             $user->activation_token = str_random(30);
         });
     }
+
+    /**
+     *
+     * @DESC: 指明一个用户拥有多条微博
+     *
+     * @author: HX
+     * @Time: 2019/5/22   9:13
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function statuses()
+    {
+        return $this->hasMany(Status::class);
+    }
 }
